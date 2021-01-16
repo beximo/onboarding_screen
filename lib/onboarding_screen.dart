@@ -8,7 +8,7 @@ class OnBoardingScreen extends StatefulWidget {
   final List mySlides;
   final List<Color> pageIndicatorColorList;
   int slideIndex;
-  final String label;
+  final Text label;
   final PageController controller;
   final Function function;
   final Color scaffoldColor;
@@ -19,7 +19,7 @@ class OnBoardingScreen extends StatefulWidget {
   final Brightness statusBarIconBrightness;
 
   OnBoardingScreen(
-      {this.label = "Button",
+      {this.label = const Text("Button"),
       this.mySlides = const [],
       this.controller,
       this.slideIndex = 0,
@@ -152,14 +152,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       child: widget.slideIndex == widget.mySlides.length - 1
                           ? Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: Text(
-                                widget.label,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black),
-                              ),
-                            )
+                              child: widget.label)
                           : Padding(
                               padding: const EdgeInsets.symmetric(vertical: 30),
                             ),

@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-        label: "< Get Started />",
+        label: Text("< Get Started />"),
         function: () {
           print("Navigation");
         },
