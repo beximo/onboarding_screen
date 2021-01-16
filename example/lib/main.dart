@@ -43,14 +43,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-      label: "< Get Started />",
-      function: () {
-        print("Navigation");
-      },
-      mySlides: mySLides,
-      controller: _controller,
-      slideIndex: 0,
-    );
+        label: "< Get Started />",
+        function: () {
+          print("Navigation");
+        },
+        mySlides: mySLides,
+        controller: _controller,
+        slideIndex: 0,
+        statusBarColor: Colors.red,
+        startGradientColor: Colors.red,
+        endGradientColor: Colors.blue,
+        skipStyle: TextStyle(color: Colors.white),
+        pageIndicatorColorList: [
+          Colors.white,
+          Colors.green,
+          Colors.red,
+          Colors.yellow,
+          Colors.white
+        ]);
   }
 }
 
