@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/onboarding_screen.dart';
-import 'package:example/models/onBoardingModel.dart';
-import 'package:example/configs/assets.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,95 +9,104 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  List<SliderModel> mySLides;
-  PageController _controller;
-
-  @override
-  void initState() {
-    mySLides = getSlides();
-    _controller = PageController();
-    super.initState();
-  }
+class MyHomePage extends StatelessWidget {
+  final List<_SliderModel> mySlides = [
+    _SliderModel(
+      imageAssetPath: Image.asset(
+        'assets/images/main_logo.png',
+        scale: 1,
+      ),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+      minTitleFontSize: 10,
+      descStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+      titleStyle: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/logo_vitbhopal.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/developer_gif.gif'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/backgroundImg.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/main_logo.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+  ];
+  final PageController _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-        label: Text("< Get Started />"),
-        function: () {
-          print("Navigation");
-        },
-        mySlides: mySLides,
-        controller: _controller,
-        slideIndex: 0,
-        statusBarColor: Colors.red,
-        startGradientColor: Colors.red,
-        endGradientColor: Colors.blue,
-        skipStyle: TextStyle(color: Colors.white),
-        pageIndicatorColorList: [
-          Colors.white,
-          Colors.green,
-          Colors.red,
-          Colors.yellow,
-          Colors.white
-        ]);
+      label: const Text('Get Started'),
+
+      /// This function works when you will complete `OnBoarding`
+      function: () {
+        print('Navigation');
+      },
+
+      /// This [mySlides] must not be more than 5.
+      mySlides: mySlides,
+      controller: _controller,
+      slideIndex: 0,
+      statusBarColor: Colors.red,
+      startGradientColor: Colors.red,
+      endGradientColor: Colors.blue,
+      skipStyle: TextStyle(color: Colors.white),
+      pageIndicatorColorList: [
+        Colors.white,
+        Colors.green,
+        Colors.red,
+        Colors.yellow,
+        Colors.white
+      ],
+    );
   }
 }
 
-List<SliderModel> getSlides() {
-  List<SliderModel> slides = [
-    SliderModel(
-      imageAssetPath: Image.asset(
-        Assets.dsc_logo,
-        scale: 1,
-      ),
-      title: "Developer Student Club",
-      desc: "discover people",
-      minTitleFontSize: 10,
-      descStyle: TextStyle(
-          fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black),
-      titleStyle: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.vitb_dsc_logo),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.thirdPage),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.containerBackgroundImg),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.dsc_logo),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-  ];
+class _SliderModel {
+  const _SliderModel({
+    this.imageAssetPath,
+    this.title = "title",
+    this.desc = "title",
+    this.miniDescFontSize = 12.0,
+    this.minTitleFontSize = 15.0,
+    this.descStyle,
+    this.titleStyle,
+  });
 
-  return slides;
+  final Image imageAssetPath;
+  final String title;
+  final TextStyle titleStyle;
+  final double minTitleFontSize;
+  final String desc;
+  final TextStyle descStyle;
+  final double miniDescFontSize;
 }
