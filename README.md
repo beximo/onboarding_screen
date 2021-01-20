@@ -4,22 +4,24 @@ A customizable onboarding screen for you flutter apps
 ## Getting Started
 
 To install the package
-1. `onboarding_screen: ^0.0.1` ( copy this and paste it in your pubspec.yml file )
+1. `onboarding_screen: ^0.0.2` ( copy this and paste it in your pubspec.yml file )
 2. `flutter pub get` run this command
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 
 # screen recording of the package
 <img src="https://github.com/beximo/onboarding_screen/blob/master/readme_files/demo.gif?raw=true" width="130" height="250"/>
 
+# Status
+- [x] Onboarding screen with custom option - Complete
+- [ ] Animations remaing
+
+
 # How to use:
 * Example code
 
 ```dart
-
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/onboarding_screen.dart';
-import 'package:example/models/onBoardingModel.dart'; // model of your onBoarding Screen
-import 'package:example/configs/assets.dart'; // you app images and gif in assets folder
 
 void main() {
   runApp(MyApp());
@@ -29,88 +31,108 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Onboarding screen Demo',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Onboarding screen demo'),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  List<SliderModel> mySLides; // list for containg slides data
-  PageController _controller; // page controller
-
-  @override
-  void initState() {
-    mySLides = getSlides(); // get all data from getSlides function
-    _controller = PageController(); // initialize page controller
-    super.initState();
-  }
+class MyHomePage extends StatelessWidget {
+  final List<_SliderModel> mySlides = [
+    _SliderModel(
+      imageAssetPath: Image.asset(
+        'assets/images/main_logo.png',
+        scale: 1,
+      ),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+      minTitleFontSize: 10,
+      descStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+      titleStyle: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/logo_vitbhopal.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/developer_gif.gif'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/backgroundImg.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+    _SliderModel(
+      imageAssetPath: Image.asset('assets/images/main_logo.png'),
+      title: 'Developer Student Club',
+      desc: 'discover people',
+    ),
+  ];
+  final PageController _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-      label: "< Get Started />", // label is the button text
+      label: const Text('Get Started'),
+
+      /// This function works when you will complete `OnBoarding`
       function: () {
-        print("Navigation");
-      }, // function is the call back for label button you can perform action such as navigating to home screen or any thing
-      mySlides: mySLides, // pass the slides list to mySlides 
-      controller: _controller, // pass page controller to controller
-      slideIndex: 0, // start index of your onboarding screen
+        print('Navigation');
+      },
+
+      /// This [mySlides] must not be more than 5.
+      mySlides: mySlides,
+      controller: _controller,
+      slideIndex: 0,
+      statusBarColor: Colors.red,
+      startGradientColor: Colors.red,
+      endGradientColor: Colors.blue,
+      skipStyle: TextStyle(color: Colors.white),
+      pageIndicatorColorList: [
+        Colors.white,
+        Colors.green,
+        Colors.red,
+        Colors.yellow,
+        Colors.white
+      ],
     );
   }
 }
 
-List<SliderModel> getSlides() {
-  List<SliderModel> slides = [
-    SliderModel(
-      imageAssetPath: Image.asset(
-        Assets.dsc_logo,
-        scale: 1,
-      ),
-      title: "Developer Student Club",
-      desc: "discover people",
-      minTitleFontSize: 10,
-      descStyle: TextStyle(
-          fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black),
-      titleStyle: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.vitb_dsc_logo),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.thirdPage),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.containerBackgroundImg),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-    SliderModel(
-      imageAssetPath: Image.asset(Assets.dsc_logo),
-      title: "Developer Student Club",
-      desc: "discover people",
-    ),
-  ];
+class _SliderModel {
+  const _SliderModel({
+    this.imageAssetPath,
+    this.title = "title",
+    this.desc = "title",
+    this.miniDescFontSize = 12.0,
+    this.minTitleFontSize = 15.0,
+    this.descStyle,
+    this.titleStyle,
+  });
 
-  return slides;
+  final Image imageAssetPath;
+  final String title;
+  final TextStyle titleStyle;
+  final double minTitleFontSize;
+  final String desc;
+  final TextStyle descStyle;
+  final double miniDescFontSize;
 }
+
 
 ```
 
@@ -134,6 +156,9 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 > If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
 >
 > - ![PayTm](./readme_files/PayTM.jpg)
+
+### Contributors
+* [Abhishek](https://github.com/Abhishek01039)
 
 
 
