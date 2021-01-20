@@ -1,0 +1,34 @@
+# Name of our workflow which will act as an identifier when have multilple workflows.
+name: CICD for uploading package on pubdev
+
+# Define trigger point, on push on master branch, this workflow will be triggered.
+on:
+  push:
+    branches: [ stable ]
+
+# The job(s) you want to do when the workflow is triggered
+# We will be using an ubuntu-latest virtual machine to perform these processes
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Job consists of instructions that you want to trigger
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checkout our code
+      - uses: actions/checkout@v1
+
+      # Switching to Flutter dev branch
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      
+      # Get the latst dependencies
+      - run: flutter pub get
+      
+      # dry run to check every thing is okk
+      - run: flutter pub publish --dry-run
+      
+      # publish command
+      - run: flutter pub publish
