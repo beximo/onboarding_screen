@@ -9,7 +9,7 @@ To install the package
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 
 # screen recording of the package
-![git](https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif)
+<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif"/>
 
 # Status
 - [x] Onboarding screen with custom option - Complete
