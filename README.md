@@ -9,11 +9,11 @@ To install the package
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 
 # screen recording of the package
-<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif"/>
+<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif" height="460" width="240"/>
 
 # Status
 - [x] Onboarding screen with custom option - Complete
-- [ ] Animations remaing
+- [ ] Animations remaining
 
 
 # How to use:
@@ -155,7 +155,7 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 
 > If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
 >
-> - ![PayTm](./readme_files/PayTM.jpg)
+<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/PayTM.jpg" height="200" width="200"/>
 
 ### Contributors
 * [Abhishek](https://github.com/Abhishek01039)
