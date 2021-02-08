@@ -6,10 +6,10 @@ import 'package:onboarding_screen/widgets/pageIndicator.dart';
 // ignore: must_be_immutable
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({
-    Key key,
+    Key? key,
     this.label = const Text('Button'),
     this.mySlides = const [],
-    this.controller,
+    required this.controller,
     this.slideIndex = 0,
     this.skipStyle = const TextStyle(
       fontSize: 16,
@@ -31,41 +31,40 @@ class OnBoardingScreen extends StatefulWidget {
       Colors.red,
     ],
   })  : assert(mySlides.length < 6, 'Slides\'s size must not be more than 5'),
-        assert(controller != null, 'controller must not be null'),
         super(key: key);
 
   /// list of sliders
   final List mySlides;
 
   /// color of each sliders
-  final List<Color> pageIndicatorColorList;
+  final List<Color?>? pageIndicatorColorList;
 
   /// current slider index
-  int slideIndex;
+  int? slideIndex;
 
   /// label at the last slider
-  final Text label;
+  final Text? label;
 
   /// controller of slider
   final PageController controller;
 
   /// defines what to do after pressing [label]
-  final Function function;
+  final Function()? function;
 
   /// color of scaffold
-  final Color scaffoldColor;
+  final Color? scaffoldColor;
 
   /// color of status bar
-  final Color statusBarColor;
+  final Color? statusBarColor;
 
-  final Color startGradientColor;
-  final Color endGradientColor;
+  final Color? startGradientColor;
+  final Color? endGradientColor;
 
   /// style of skip text
-  final TextStyle skipStyle;
+  final TextStyle? skipStyle;
 
   /// Brightness of status bar icon
-  final Brightness statusBarIconBrightness;
+  final Brightness? statusBarIconBrightness;
 
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
@@ -88,8 +87,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              widget.startGradientColor,
-              widget.endGradientColor,
+              widget.startGradientColor!,
+              widget.endGradientColor!,
             ],
           ),
         ),
@@ -168,17 +167,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         i == widget.slideIndex
                             ? buildPageIndicator(
                                 true,
-                                widget.pageIndicatorColorList[
-                                    widget.pageIndicatorColorList.length -
+                                widget.pageIndicatorColorList![
+                                    widget.pageIndicatorColorList!.length -
                                         i -
                                         1],
                               )
                             : buildPageIndicator(
                                 false,
-                                widget.pageIndicatorColorList[
-                                    widget.pageIndicatorColorList.length -
+                                widget.pageIndicatorColorList![
+                                    widget.pageIndicatorColorList!.length -
                                         i -
-                                        1],
+                                        1]!,
                               ),
                     ],
                   ),
@@ -196,19 +195,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   void dispose() {
-    widget.controller?.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 }
 
 class _SlideTile extends StatelessWidget {
-  final Widget image;
-  final String title, desc;
+  final Widget? image;
+  final String? title, desc;
   final bool isFirst;
-  final double minTitleFontSize;
-  final TextStyle titleStye;
-  final TextStyle descStyle;
-  final double miniDescFontSize;
+  final double? minTitleFontSize;
+  final TextStyle? titleStye;
+  final TextStyle? descStyle;
+  final double? miniDescFontSize;
 
   const _SlideTile({
     this.image,
@@ -229,19 +228,19 @@ class _SlideTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          image,
+          image!,
           const SizedBox(
             height: 8,
           ),
           AutoSizeText(
-            title,
-            minFontSize: minTitleFontSize,
+            title!,
+            minFontSize: minTitleFontSize!,
             maxLines: 1,
             style: titleStye,
           ),
           AutoSizeText(
-            desc,
-            minFontSize: miniDescFontSize,
+            desc!,
+            minFontSize: miniDescFontSize!,
             maxLines: 1,
             style: descStyle,
           )
