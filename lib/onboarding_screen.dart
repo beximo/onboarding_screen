@@ -6,6 +6,7 @@ import 'package:onboarding_screen/widgets/pageIndicator.dart';
 // ignore: must_be_immutable
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({
+    Key key,
     this.label = const Text('Button'),
     this.mySlides = const [],
     this.controller,
@@ -30,7 +31,8 @@ class OnBoardingScreen extends StatefulWidget {
       Colors.red,
     ],
   })  : assert(mySlides.length < 6, 'Slides\'s size must not be more than 5'),
-        assert(controller != null, 'controller must not be null');
+        assert(controller != null, 'controller must not be null'),
+        super(key: key);
 
   /// list of sliders
   final List mySlides;
@@ -194,7 +196,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.controller?.dispose();
     super.dispose();
   }
 }
@@ -222,7 +224,7 @@ class _SlideTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

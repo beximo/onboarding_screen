@@ -65,7 +65,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnBoardingScreen(
-      label: const Text('Get Started'),
+      label: const Text(
+        'Get Started',
+        key: Key('get_started'),
+      ),
 
       /// This function works when you will complete `OnBoarding`
       function: () {
