@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:onboarding_screen/widgets/pageIndicator.dart';
+import 'package:onboarding_screen/widgets/page_indicator.dart';
 
 // ignore: must_be_immutable
 class OnBoardingScreen extends StatefulWidget {
