@@ -1,14 +1,14 @@
 # onboarding_screen
-A customizable onboarding screen for you flutter apps
+A customizable onboarding screen with different options and animations for your flutter apps.
 
 ## Getting Started
 
 To install the package
-1. `onboarding_screen: ^0.0.2` ( copy this and paste it in your pubspec.yml file )
+1. `onboarding_screen: ^0.0.3` (copy this and paste it in your pubspec.yaml file )
 2. `flutter pub get` run this command
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 
-# screen recording of the package
+# How this package works
 <img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif" height="460" width="240"/>
 
 # Status
@@ -153,10 +153,6 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 [Ankit sagar](https://github.com/woinbo) ([Twitter](https://www.twitter.com/woinbo)) ([YouTube](https://www.youtube.com/c/beximo))
 ([Instagram](https://www.instagram.com/woinbo))
 
-> If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
->
-<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/PayTM.jpg" height="200" width="200"/>
-
 ### Contributors
 * [Abhishek](https://github.com/Abhishek01039)
 
@@ -165,6 +161,6 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 ## Getting Started
 
 For help getting started with Flutter, view our online
-[documentation](https://flutter.dev/).
+[documentation](http://flutter.io/).
 
 For help on editing plugin code, view the [documentation](https://pub.dev/documentation/onboarding_screen/latest/).
