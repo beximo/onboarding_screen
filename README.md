@@ -165,6 +165,6 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 ## Getting Started
 
 For help getting started with Flutter, view our online
-[documentation](http://flutter.io/).
+[documentation](https://flutter.dev/).
 
 For help on editing plugin code, view the [documentation](https://pub.dev/documentation/onboarding_screen/latest/).

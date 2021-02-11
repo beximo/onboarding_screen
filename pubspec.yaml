@@ -1,5 +1,5 @@
 name: onboarding_screen
-description: Integration tests
+description: A customizable onboarding screen with different options and animations for your flutter apps
 version: 0.0.3
 homepage: https://github.com/woinbo/onboarding_screen.git
 
