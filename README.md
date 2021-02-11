@@ -1,5 +1,5 @@
 # onboarding_screen
-A customizable onboarding screen for your flutter apps
+A customizable onboarding screen with different options and animations for your flutter apps.
 
 ## Getting Started
 
