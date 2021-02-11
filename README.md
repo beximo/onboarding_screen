@@ -1,14 +1,14 @@
 # onboarding_screen
-A customizable onboarding screen for you flutter apps
+A customizable onboarding screen for your flutter apps
 
 ## Getting Started
 
 To install the package
-1. `onboarding_screen: ^0.0.2` ( copy this and paste it in your pubspec.yml file )
+1. `onboarding_screen: ^0.0.2` (copy this and paste it in your pubspec.yaml file )
 2. `flutter pub get` run this command
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 
-# screen recording of the package
+# How this package works
 <img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/demo.gif" height="460" width="240"/>
 
 # Status
