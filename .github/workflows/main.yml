@@ -3,7 +3,7 @@ name: CICD for uploading package on pubdev
 
 # Define trigger point, on push on master branch, this workflow will be triggered.
 on:
-  push:
+  pull_request:
     branches: [ stable ]
 
 # The job(s) you want to do when the workflow is triggered
@@ -31,4 +31,4 @@ jobs:
       - run: flutter pub publish --dry-run
       
       # publish command
-      - run: flutter pub publish
+      #- run: flutter pub publish
