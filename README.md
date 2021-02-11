@@ -153,10 +153,6 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 [Ankit sagar](https://github.com/woinbo) ([Twitter](https://www.twitter.com/woinbo)) ([YouTube](https://www.youtube.com/c/beximo))
 ([Instagram](https://www.instagram.com/woinbo))
 
-> If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
->
-<img src="https://raw.githubusercontent.com/beximo/onboarding_screen/master/readme_files/PayTM.jpg" height="200" width="200"/>
-
 ### Contributors
 * [Abhishek](https://github.com/Abhishek01039)
 
