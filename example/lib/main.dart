@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -86,16 +87,15 @@ class MyHomePage extends StatelessWidget {
       mySlides: mySlides,
       controller: _controller,
       slideIndex: 0,
-      statusBarColor: Colors.red,
-      startGradientColor: Colors.red,
-      endGradientColor: Colors.blue,
-      skipStyle: TextStyle(color: Colors.white),
+      statusBarColor: Colors.white,
+
+      skipStyle: TextStyle(color: Colors.red),
       pageIndicatorColorList: [
-        Colors.white,
+        Colors.yellow,
         Colors.green,
         Colors.red,
         Colors.yellow,
-        Colors.white
+        Colors.blue
       ],
     );
   }
