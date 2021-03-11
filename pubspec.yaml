@@ -1,7 +1,7 @@
 name: onboarding_screen
 description: A customizable onboarding screen with different options and animations for your flutter apps.
 version: 0.0.2
-homepage: https://github.com/woinbo/onboarding_screen.git
+homepage: https://github.com/beximo/onboarding_screen.git
 
 environment:
   sdk: ">=2.12.0-0 <3.0.0"
