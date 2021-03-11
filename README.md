@@ -4,7 +4,7 @@ A customizable onboarding screen with different options and animations for your 
 ## Getting Started
 
 To install the package
-1. `onboarding_screen: ^0.0.3` (copy this and paste it in your pubspec.yaml file )
+1. `onboarding_screen: ^0.0.2` (copy this and paste it in your pubspec.yaml file )
 2. `flutter pub get` run this command
 3. `import 'package:onboarding_screen/onboarding_screen.dart';` copy and this statment into your project and start using it.
 

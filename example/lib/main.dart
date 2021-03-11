@@ -1,3 +1,4 @@
+import 'package:example/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/onboarding_screen.dart';
 
@@ -9,7 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Onboarding Screen Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final PageController _controller = PageController();
+
   final List<_SliderModel> mySlides = [
     _SliderModel(
       imageAssetPath: Image.asset(
@@ -60,7 +64,6 @@ class MyHomePage extends StatelessWidget {
       desc: 'discover people',
     ),
   ];
-  final PageController _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +75,27 @@ class MyHomePage extends StatelessWidget {
 
       /// This function works when you will complete `OnBoarding`
       function: () {
-        print('Navigation');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => HomeScreen(),
+          ),
+        );
       },
 
       /// This [mySlides] must not be more than 5.
       mySlides: mySlides,
       controller: _controller,
       slideIndex: 0,
-      statusBarColor: Colors.red,
-      startGradientColor: Colors.red,
-      endGradientColor: Colors.blue,
-      skipStyle: TextStyle(color: Colors.white),
+      statusBarColor: Colors.white,
+
+      skipStyle: TextStyle(color: Colors.red),
       pageIndicatorColorList: [
-        Colors.white,
+        Colors.yellow,
         Colors.green,
         Colors.red,
         Colors.yellow,
-        Colors.white
+        Colors.blue
       ],
     );
   }
@@ -105,11 +112,11 @@ class _SliderModel {
     this.titleStyle,
   });
 
-  final Image imageAssetPath;
+  final Image? imageAssetPath;
   final String title;
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
   final double minTitleFontSize;
   final String desc;
-  final TextStyle descStyle;
+  final TextStyle? descStyle;
   final double miniDescFontSize;
 }
