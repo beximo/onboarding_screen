@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:onboarding_screen/widgets/page_indicator.dart';
 
+enum Indicators { circle, line, cool }
+
+enum SkipPosition { topRight, topLeft, bottomRight, bottomLeft }
+
 // ignore: must_be_immutable
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({
@@ -11,11 +15,14 @@ class OnBoardingScreen extends StatefulWidget {
     this.mySlides = const [],
     required this.controller,
     this.slideIndex = 0,
+    this.indicators = Indicators.circle,
+    this.skipPosition = SkipPosition.topRight,
     this.skipStyle = const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
       color: Colors.black,
     ),
+    this.skipDecoration,
     this.function,
     this.startGradientColor = const Color(0xffffffff),
     this.endGradientColor = const Color(0xffffffff),
@@ -33,14 +40,20 @@ class OnBoardingScreen extends StatefulWidget {
   })  : assert(mySlides.length < 6, 'Slides\'s size must not be more than 5'),
         super(key: key);
 
-  /// list of sliders
+  /// list of sliders, max 5 slides are supported till now
   final List mySlides;
 
-  /// color of each sliders
+  /// color of each cicle slide Indicators
   final List<Color?>? pageIndicatorColorList;
 
   /// current slider index
   int? slideIndex;
+
+  ///type of slide indicators [circle,line]
+  final Indicators indicators;
+
+  ///Skip Position
+  final SkipPosition skipPosition;
 
   /// label at the last slider
   final Text? label;
@@ -62,6 +75,9 @@ class OnBoardingScreen extends StatefulWidget {
 
   /// style of skip text
   final TextStyle? skipStyle;
+
+  /// skip button style
+  final Decoration? skipDecoration;
 
   /// Brightness of status bar icon
   final Brightness? statusBarIconBrightness;
@@ -92,100 +108,168 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ],
           ),
         ),
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 40, right: 26),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        if (widget.controller.hasClients) {
-                          widget.controller.animateToPage(
-                              widget.mySlides.length - 1,
-                              duration: Duration(milliseconds: 400),
-                              curve: Curves.linear);
-                        }
-                      },
-                      child: Text(
-                        'skip >>',
-                        style: widget.skipStyle,
-                      ),
-                    ),
+            Positioned(
+              right: widget.skipPosition == SkipPosition.topRight
+                  ? 0
+                  : widget.skipPosition == SkipPosition.bottomRight
+                      ? 0
+                      : null,
+              top: widget.skipPosition == SkipPosition.topRight
+                  ? 0
+                  : widget.skipPosition == SkipPosition.topLeft
+                      ? 0
+                      : null,
+              left: widget.skipPosition == SkipPosition.topLeft
+                  ? 0
+                  : widget.skipPosition == SkipPosition.bottomLeft
+                      ? 0
+                      : null,
+              bottom: widget.skipPosition == SkipPosition.bottomLeft
+                  ? 0
+                  : widget.skipPosition == SkipPosition.bottomRight
+                      ? 0
+                      : null,
+              child: Container(
+                margin: const EdgeInsets.only(
+                    top: 32, right: 8, left: 8, bottom: 20),
+                padding: const EdgeInsets.all(8.0),
+                decoration: widget.skipDecoration,
+                child: GestureDetector(
+                  onTap: () {
+                    if (widget.controller.hasClients) {
+                      widget.controller.animateToPage(
+                          widget.mySlides.length - 1,
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.linear);
+                    }
+                  },
+                  child: Text(
+                    'skip >>',
+                    style: widget.skipStyle,
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 8,
-              child: PageView.builder(
-                itemCount: widget.mySlides.length,
-                controller: widget.controller,
-                onPageChanged: (index) {
-                  setState(() {
-                    widget.slideIndex = index;
-                  });
-                },
-                itemBuilder: (_, index) => _SlideTile(
-                  image: widget.mySlides[index].imageAssetPath,
-                  title: widget.mySlides[index].title,
-                  desc: widget.mySlides[index].desc,
-                  isFirst: true,
-                  minTitleFontSize: widget.mySlides[index].minTitleFontSize,
-                  miniDescFontSize: widget.mySlides[index].miniDescFontSize,
-                  titleStye: widget.mySlides[index].titleStyle,
-                  descStyle: widget.mySlides[index].descStyle,
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 20,
+            Column(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: PageView.builder(
+                    itemCount: widget.mySlides.length,
+                    controller: widget.controller,
+                    onPageChanged: (index) {
+                      setState(() {
+                        widget.slideIndex = index;
+                      });
+                    },
+                    itemBuilder: (_, index) => _SlideTile(
+                      image: widget.mySlides[index].imageAssetPath,
+                      title: widget.mySlides[index].title,
+                      desc: widget.mySlides[index].desc,
+                      isFirst: true,
+                      minTitleFontSize: widget.mySlides[index].minTitleFontSize,
+                      miniDescFontSize: widget.mySlides[index].miniDescFontSize,
+                      titleStye: widget.mySlides[index].titleStyle,
+                      descStyle: widget.mySlides[index].descStyle,
+                    ),
                   ),
-                  InkWell(
-                    onTap: widget.function,
-                    child: widget.slideIndex == widget.mySlides.length - 1
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: widget.label)
-                        : const Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 30),
-                          ),
-                  ),
-                  Row(
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      for (int i = 0; i < widget.mySlides.length; i++)
-                        i == widget.slideIndex
-                            ? buildPageIndicator(
-                                true,
-                                widget.pageIndicatorColorList![
-                                    widget.pageIndicatorColorList!.length -
-                                        i -
-                                        1],
-                              )
-                            : buildPageIndicator(
-                                false,
-                                widget.pageIndicatorColorList![
-                                    widget.pageIndicatorColorList!.length -
-                                        i -
-                                        1]!,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: widget.function,
+                        child: widget.slideIndex == widget.mySlides.length - 1
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: widget.label)
+                            : const Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 30),
                               ),
+                      ),
+                      (widget.indicators == Indicators.circle)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                for (int i = 0; i < widget.mySlides.length; i++)
+                                  i == widget.slideIndex
+                                      ? circleIndicator(
+                                          true,
+                                          widget.pageIndicatorColorList![widget
+                                                  .pageIndicatorColorList!
+                                                  .length -
+                                              i -
+                                              1],
+                                        )
+                                      : circleIndicator(
+                                          false,
+                                          widget.pageIndicatorColorList![widget
+                                                  .pageIndicatorColorList!
+                                                  .length -
+                                              i -
+                                              1]!,
+                                        ),
+                              ],
+                            )
+                          : (widget.indicators == Indicators.line)
+                              ? Row(
+                                  children: [
+                                    for (int i = 0;
+                                        i < widget.mySlides.length;
+                                        i++,)
+                                      i == widget.slideIndex
+                                          ? lineIndicator(
+                                              slideIndex: widget.slideIndex,
+                                              index: i,
+                                              activeColor: Color(0xff2455EF),
+                                              unactiveColor: Color(0xffBDCCFA),
+                                            )
+                                          : lineIndicator(
+                                              slideIndex: widget.slideIndex,
+                                              index: i,
+                                              activeColor: Color(0xff2455EF),
+                                              unactiveColor: Color(0xffBDCCFA),
+                                            ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    for (int i = 0;
+                                        i < widget.mySlides.length;
+                                        i++,)
+                                      i == widget.slideIndex
+                                          ? coolIndicator(
+                                              slideIndex: widget.slideIndex,
+                                              index: i,
+                                              activeColor: Color(0xff2455EF),
+                                              unactiveColor: Color(0xffBDCCFA),
+                                            )
+                                          : coolIndicator(
+                                              slideIndex: widget.slideIndex,
+                                              index: i,
+                                              activeColor: Color(0xff2455EF),
+                                              unactiveColor: Color(0xffBDCCFA),
+                                            ),
+                                  ],
+                                ),
+                      const SizedBox(
+                        height: 6,
+                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

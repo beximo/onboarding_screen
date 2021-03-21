@@ -88,8 +88,14 @@ class MyHomePage extends StatelessWidget {
       controller: _controller,
       slideIndex: 0,
       statusBarColor: Colors.white,
+      indicators: Indicators.cool,
+      skipPosition: SkipPosition.bottomRight,
+      skipDecoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      skipStyle: TextStyle(color: Colors.white),
 
-      skipStyle: TextStyle(color: Colors.red),
       pageIndicatorColorList: [
         Colors.yellow,
         Colors.green,
